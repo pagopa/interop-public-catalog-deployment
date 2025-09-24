@@ -1,0 +1,18 @@
+name: "strapi"
+
+serviceAccount:
+  roleArn: "arn:aws:iam::697818730278:role/..." #TBD
+
+configmap:
+  CMS_ASSETS_S3_BUCKET: "arn:aws:s3:::interop-public-catalog-cms-assets-prod-es1" 
+
+deployment:
+  env:
+  envFromConfigmaps:
+    DB_HOST: "common-...DB_HOST"
+    DB_NAME: "ccommon-...DB_NAME"
+    DB_PORT: "common-...DB_PORT"
+    DB_USE_SSL: "common-...DB_USE_SSL"
+  envFromSecrets:
+    DB_USERNAME: ""
+    DB_PASSWORD: ""

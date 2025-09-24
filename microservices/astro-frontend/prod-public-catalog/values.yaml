@@ -1,13 +1,13 @@
 name: "astro-frontend"
 
 serviceAccount:
-  roleArn: "arn:aws:iam::505630707203:role/..." #TBD
+  roleArn: "arn:aws:iam::697818730278:role/..." #TBD
 
 service:
   create: true
   portName: http
   containerPort: 8080
-  targetGroupArn: "arn:aws:elasticloadbalancing:eu-south-1:505630707203:targetgroup/dev-public-catalog-astro/455b8fd22cedaf18"
+  targetGroupArn: "arn:aws:elasticloadbalancing:eu-south-1:697818730278:targetgroup/prod-public-catalog-astro/..." #TBD
   targetType: "ip"
   ipAddressType: "ipv4"
 

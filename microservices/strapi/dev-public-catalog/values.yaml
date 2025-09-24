@@ -1,17 +1,10 @@
-name: "astro-frontend"
+name: "strapi"
 
 serviceAccount:
   roleArn: "arn:aws:iam::505630707203:role/..." #TBD
 
-service:
-  create: true
-  portName: http
-  containerPort: 8080
-  targetGroupArn: "arn:aws:elasticloadbalancing:eu-south-1:505630707203:targetgroup/dev-public-catalog-astro/455b8fd22cedaf18"
-  targetType: "ip"
-  ipAddressType: "ipv4"
-
 configmap:
+  CMS_ASSETS_S3_BUCKET: "arn:aws:s3:::interop-public-catalog-cms-assets-dev-es1"
 
 deployment:
   env:
