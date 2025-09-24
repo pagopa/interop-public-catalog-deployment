@@ -1,0 +1,11 @@
+images:
+  microservices:
+    astro-frontend:
+      tag: "develop"
+    strapi:
+      tag: "develop"
+  jobs:
+    public-catalog-updater:
+      tag: "develop"
+    opendata-updater:
+      tag: "develop"

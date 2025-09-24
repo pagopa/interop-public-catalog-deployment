@@ -1,0 +1,20 @@
+name: "public-catalog-updater"
+
+cronjob:
+  schedule: "0 20 * * *"
+  timeZone: "Europe/Rome"
+  failedJobsHistoryLimit: 2
+  successfulJobsHistoryLimit: 1
+  restartPolicy: OnFailure
+
+  envFromConfigmaps:
+    READMODEL_SQL_DB_HOST: "common-read-model-sql.DB_HOST_RO"
+    READMODEL_SQL_DB_PORT: "common-read-model-sql.DB_PORT"
+    READMODEL_SQL_DB_NAME: "common-read-model-sql.DB_NAME"
+    READMODEL_SQL_DB_USE_SSL: "common-read-model-sql.DB_USE_SSL"
+
+  envFromSecrets:
+    READMODEL_SQL_DB_USERNAME: ""
+    READMODEL_SQL_DB_PASSWORD: ""
+
+
