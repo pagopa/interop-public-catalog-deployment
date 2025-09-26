@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: common-public-catalog-data-sql
+  namespace: prod-public-catalog
+data:
+  DB_HOST_RO: "interop-public-catalog-data-prod..." #TBD
+  DB_PORT: "5432"
+  DB_NAME: "interop_public_catalog_data_prod"
+  DB_USE_SSL: "true"

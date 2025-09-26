@@ -9,10 +9,10 @@ configmap:
 deployment:
   env:
   envFromConfigmaps:
-    DB_HOST: "common-...DB_HOST"
-    DB_NAME: "ccommon-...DB_NAME"
-    DB_PORT: "common-...DB_PORT"
-    DB_USE_SSL: "common-...DB_USE_SSL"
+    DB_HOST: "common-public-catalog-data-sql.DB_HOST_RO"
+    DB_PORT: "common-public-catalog-data-sql.DB_PORT"
+    DB_NAME: "common-public-catalog-data-sql.DB_NAME"
+    DB_USE_SSL: "common-public-catalog-data-sql.DB_USE_SSL"
   envFromSecrets:
-    DB_USERNAME: ""
-    DB_PASSWORD: ""
+    DB_USERNAME: "public-catalog-data-strapi-user.username"
+    DB_PASSWORD: "public-catalog-data-strapi-user.password"

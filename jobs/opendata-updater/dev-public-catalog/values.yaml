@@ -1,0 +1,18 @@
+name: "opendata-updater"
+
+cronjob:
+  schedule: "0 20 * * *"
+  timeZone: "Europe/Rome"
+  failedJobsHistoryLimit: 2
+  successfulJobsHistoryLimit: 1
+  restartPolicy: OnFailure
+
+  envFromConfigmaps:
+    DB_HOST: "common-public-catalog-data-sql.DB_HOST_RO"
+    DB_PORT: "common-public-catalog-data-sql.DB_PORT"
+    DB_NAME: "common-public-catalog-data-sql.DB_NAME"
+    DB_USE_SSL: "common-public-catalog-data-sql.DB_USE_SSL"
+
+  envFromSecrets:
+    DB_USERNAME: "public-catalog-data-opendata-updater-user.username"
+    DB_PASSWORD: "public-catalog-data-opendata-updater-user.password"
