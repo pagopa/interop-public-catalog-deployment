@@ -18,7 +18,7 @@ cronjob:
     PUBLIC_CATALOG_DATA_SQL_DB_USE_SSL: "common-public-catalog-data-sql.DB_USE_SSL"
 
   envFromSecrets:
-    READMODEL_SQL_DB_USERNAME: ""
-    READMODEL_SQL_DB_PASSWORD: ""
+    READMODEL_SQL_DB_USERNAME: "platform-data-public-catalog-updater-user.username"
+    READMODEL_SQL_DB_PASSWORD: "platform-data-public-catalog-updater-user.password"
     PUBLIC_CATALOG_DATA_SQL_DB_USERNAME: "public-catalog-data-public-catalog-updater-user.username"
     PUBLIC_CATALOG_DATA_SQL_DB_PASSWORD: "public-catalog-data-public-catalog-updater-user.password"
