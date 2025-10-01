@@ -10,7 +10,7 @@ tags = {
 
 eks_cluster_name = "interop-eks-cluster-dev"
 
-sns_topic_name = "interop-platform-alarms-dev"
+sns_topic_name = "interop-public-catalog-alarms-dev"
 
 cloudwatch_log_group_name = "/aws/eks/interop-eks-cluster-dev/application" #TOCHECK BECAUSE OF DIFFERENT FARGATE PROFILE
 
