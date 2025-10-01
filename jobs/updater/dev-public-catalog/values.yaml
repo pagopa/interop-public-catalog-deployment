@@ -1,5 +1,8 @@
 name: "updater"
 
+serviceAccount:
+  roleArn: "arn:aws:iam::505630707203:role/interop-public-catalog-updater-dev"
+
 cronjob:
   schedule: "0 20 * * *"
   timeZone: "Europe/Rome"

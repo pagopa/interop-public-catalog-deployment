@@ -1,18 +1,17 @@
 name: "strapi"
 
 serviceAccount:
-  roleArn: "arn:aws:iam::697818730278:role/..." #TBD
+  roleArn: "arn:aws:iam::697818730278:role/interop-public-catalog-strapi-prod"
 
 configmap:
-  CMS_ASSETS_S3_BUCKET: "arn:aws:s3:::interop-public-catalog-cms-assets-prod-es1" 
+  AWS_BUCKET: "arn:aws:s3:::interop-public-catalog-cms-assets-prod-es1" 
 
 deployment:
-  env:
   envFromConfigmaps:
-    DB_HOST: "common-public-catalog-data-sql.DB_HOST_RO"
-    DB_PORT: "common-public-catalog-data-sql.DB_PORT"
-    DB_NAME: "common-public-catalog-data-sql.DB_NAME"
-    DB_USE_SSL: "common-public-catalog-data-sql.DB_USE_SSL"
+    DATABASE_HOST: "common-public-catalog-data-sql.DB_HOST_RO"
+    DATABASE_PORT: "common-public-catalog-data-sql.DB_PORT"
+    DATABASE_NAME: "common-public-catalog-data-sql.DB_NAME"
+    DATABASE_SSL: "common-public-catalog-data-sql.DB_USE_SSL"
   envFromSecrets:
-    DB_USERNAME: "public-catalog-data-strapi-user.username"
-    DB_PASSWORD: "public-catalog-data-strapi-user.password"
+    DATABASE_USERNAME: "public-catalog-data-strapi-user.username"
+    DATABASE_PASSWORD: "public-catalog-data-strapi-user.password"
