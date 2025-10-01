@@ -1,4 +1,4 @@
-name: "public-catalog-updater"
+name: "updater"
 
 cronjob:
   schedule: "0 20 * * *"
