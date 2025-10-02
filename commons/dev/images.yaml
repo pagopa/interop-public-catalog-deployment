@@ -7,5 +7,3 @@ images:
   jobs:
     public-catalog-updater:
       tag: "develop"
-    opendata-updater:
-      tag: "develop"
