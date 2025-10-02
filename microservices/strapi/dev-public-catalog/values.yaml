@@ -3,6 +3,11 @@ name: "strapi"
 serviceAccount:
   roleArn: "arn:aws:iam::505630707203:role/interop-public-catalog-strapi-dev"
 
+service:
+  create: true
+  portName: http
+  containerPort: 8080
+
 configmap:
   AWS_BUCKET: "arn:aws:s3:::interop-public-catalog-cms-assets-dev-es1"
 

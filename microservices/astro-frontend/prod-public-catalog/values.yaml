@@ -12,6 +12,8 @@ service:
   ipAddressType: "ipv4"
 
 configmap:
+  STRAPI_API_URL: "http://strapi.prod-public-catalog:8080"
+  STRAPI_API_PORT: 8080
 
 deployment:
   envFromConfigmaps:
