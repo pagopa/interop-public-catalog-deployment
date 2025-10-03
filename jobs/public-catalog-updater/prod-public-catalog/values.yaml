@@ -1,7 +1,7 @@
-name: "updater"
+name: "public-catalog-updater"
 
 serviceAccount:
-  roleArn: "arn:aws:iam::505630707203:role/interop-public-catalog-updater-dev"
+  roleArn: "arn:aws:iam::{{.Values.local.interop_public_catalog_commons.AWS_ACCOUNT_ID}}:role/interop-public-catalog-updater-prod"
 
 cronjob:
   schedule: "0 20 * * *"

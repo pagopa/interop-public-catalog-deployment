@@ -1,6 +1,8 @@
 namespace: "dev-public-catalog"
+techStack: "nodejs"
 
-cronjob:
+deployment:
+  replicas: 1
   env:
     LOG_LEVEL: "info"
   image:
@@ -15,3 +17,7 @@ cronjob:
     limits:
       cpu: "1000m"
       memory: "2Gi"
+
+local:
+  interop_public_catalog_commons:
+    AWS_ACCOUNT_ID: "505630707203"

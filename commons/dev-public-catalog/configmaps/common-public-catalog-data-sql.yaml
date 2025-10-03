@@ -8,3 +8,4 @@ data:
   DB_PORT: "5432"
   DB_NAME: "interop_public_catalog_data_dev"
   DB_USE_SSL: "true"
+  DB_SCHEMA_STRAPI: "strapi-db" # TOCHECK
