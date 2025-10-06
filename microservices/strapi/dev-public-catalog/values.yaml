@@ -1,7 +1,7 @@
 name: "interop-public-catalog-strapi"
 
 serviceAccount:
-  roleArn: "arn:aws:iam::{{.Values.local.interop_public_catalog_commons.AWS_ACCOUNT_ID}}:role/interop-public-catalog-strapi-dev"
+  roleArn: "arn:aws:iam::{{.Values.local.awsAccountId}}:role/interop-public-catalog-strapi-dev"
 
 service:
   create: true
@@ -19,17 +19,17 @@ configmap:
 deployment:
   envFromConfigmaps:
     DATABASE_CLIENT: "postgres"
-    DATABASE_HOST: "common-public-catalog-data-sql.DB_HOST_RO"
-    DATABASE_PORT: "common-public-catalog-data-sql.DB_PORT"
-    DATABASE_NAME: "common-public-catalog-data-sql.DB_NAME"
-    DATABASE_SSL: "common-public-catalog-data-sql.DB_USE_SSL"
-    DATABASE_SCHEMA: "common-public-catalog-data-sql.DB_SCHEMA_STRAPI"
+    DATABASE_HOST: "common-public-catalog-data.DB_HOST_RO"
+    DATABASE_PORT: "common-public-catalog-data.DB_PORT"
+    DATABASE_NAME: "common-public-catalog-data.DB_NAME_STRAPI"
+    DATABASE_SSL: "common-public-catalog-data.DB_USE_SSL"
+    DATABASE_SCHEMA: "common-public-catalog-data.DB_SCHEMA_STRAPI"
   envFromSecrets:
     DATABASE_USERNAME: "public-catalog-data-strapi-user.username"
     DATABASE_PASSWORD: "public-catalog-data-strapi-user.password"
-    APP_KEYS: 
-    API_TOKEN_SALT:
-    ENCRYPTION_KEY:
-    ADMIN_JWT_SECRET:
-    JWT_SECRET:
-    GH_WORKFLOW_TOKEN:
+    APP_KEYS: "public-catalog-strapi-app-keys"
+    API_TOKEN_SALT: "public-catalog-strapi-api-token-salt"
+    ADMIN_JWT_SECRET: "public-catalog-strapi-admin-jwt-key"
+    JWT_SECRET: "public-catalog-strapi-standard-users-jwt-key"
+    ENCRYPTION_KEY: "public-catalog-strapi-encryption-key"
+    GH_WORKFLOW_TOKEN: "public-catalog-strapi-gh-workflow-token"

@@ -19,5 +19,4 @@ deployment:
       memory: "2Gi"
 
 local:
-  interop_public_catalog_commons:
-    AWS_ACCOUNT_ID: "697818730278"
+  awsAccountId: "697818730278"

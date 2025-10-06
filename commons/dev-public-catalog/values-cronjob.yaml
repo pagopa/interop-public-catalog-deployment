@@ -17,5 +17,4 @@ cronjob:
       memory: "2Gi"
 
 local:
-  interop_public_catalog_commons:
-    AWS_ACCOUNT_ID: "505630707203"
+  awsAccountId: "505630707203"

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: common-public-catalog-data-sql
+  name: common-public-catalog-data
   namespace: prod-public-catalog
 data:
   DB_HOST_RO: "interop-public-catalog-data-prod..." #TBD

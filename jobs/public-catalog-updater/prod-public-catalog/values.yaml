@@ -1,7 +1,11 @@
 name: "public-catalog-updater"
 
 serviceAccount:
-  roleArn: "arn:aws:iam::{{.Values.local.interop_public_catalog_commons.AWS_ACCOUNT_ID}}:role/interop-public-catalog-updater-prod"
+  roleArn: "arn:aws:iam::{{.Values.local.awsAccountId}}:role/interop-public-catalog-updater-prod"
+
+configmap:
+  CDN_ID: "" #TBD
+  CDN_INVALIDATION_PATH: "/catalogo/*"
 
 cronjob:
   schedule: "0 20 * * *"
@@ -10,15 +14,34 @@ cronjob:
   successfulJobsHistoryLimit: 1
   restartPolicy: OnFailure
 
+  flywayInitContainer:
+    create: true
+    version: "11.4.0"
+    downloadRedshiftDriver: false
+    migrationsConfigmap: "common-flyway-...-schema" #TBD
+    env:
+      FLYWAY_CREATE_SCHEMAS: true
+      FLYWAY_PLACEHOLDER_REPLACEMENT: true
+      FLYWAY_PLACEHOLDERS_NAMESPACE: "prod"
+      FLYWAY_URL: jdbc:postgresql://$(DB_HOST):$(DB_PORT)/$(DB_NAME)
+      FLYWAY_SCHEMAS: "..." #TBD
+    envFromConfigmaps:
+      DB_HOST: "common-public-catalog-data.DB_HOST"
+      DB_PORT: "common-public-catalog-data.DB_PORT"
+      DB_NAME: "common-public-catalog-data.DB_NAME"
+    envFromSecrets:
+      FLYWAY_USER: "public-catalog-data-flyway-user.username"
+      FLYWAY_PASSWORD: "public-catalog-data-flyway-user.password"
+
   envFromConfigmaps:
-    READMODEL_SQL_DB_HOST: "common-read-model-sql.DB_HOST_RO"
-    READMODEL_SQL_DB_PORT: "common-read-model-sql.DB_PORT"
-    READMODEL_SQL_DB_NAME: "common-read-model-sql.DB_NAME"
-    READMODEL_SQL_DB_USE_SSL: "common-read-model-sql.DB_USE_SSL"
-    PUBLIC_CATALOG_DATA_SQL_DB_HOST: "common-public-catalog-data-sql.DB_HOST_RO"
-    PUBLIC_CATALOG_DATA_SQL_DB_PORT: "common-public-catalog-data-sql.DB_PORT"
-    PUBLIC_CATALOG_DATA_SQL_DB_NAME: "common-public-catalog-data-sql.DB_NAME"
-    PUBLIC_CATALOG_DATA_SQL_DB_USE_SSL: "common-public-catalog-data-sql.DB_USE_SSL"
+    READMODEL_SQL_DB_HOST: "common-read-model.DB_HOST"
+    READMODEL_SQL_DB_PORT: "common-read-model.DB_PORT"
+    READMODEL_SQL_DB_NAME: "common-read-model.DB_NAME"
+    READMODEL_SQL_DB_USE_SSL: "common-read-model.DB_USE_SSL"
+    PUBLIC_CATALOG_DATA_SQL_DB_HOST: "common-public-catalog-data.DB_HOST"
+    PUBLIC_CATALOG_DATA_SQL_DB_PORT: "common-public-catalog-data.DB_PORT"
+    PUBLIC_CATALOG_DATA_SQL_DB_NAME: "common-public-catalog-data.DB_NAME"
+    PUBLIC_CATALOG_DATA_SQL_DB_USE_SSL: "common-public-catalog-data.DB_USE_SSL"
 
   envFromSecrets:
     READMODEL_SQL_DB_USERNAME: "platform-data-public-catalog-updater-user.username"

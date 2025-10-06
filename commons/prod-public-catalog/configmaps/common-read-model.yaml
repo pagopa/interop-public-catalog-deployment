@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: common-read-model-sql
+  name: common-read-model
   namespace: prod-public-catalog
 data:
   DB_HOST_RO: "interop-platform-data-prod.cluster-ro-cgo3fcsduspu.eu-south-1.rds.amazonaws.com"
