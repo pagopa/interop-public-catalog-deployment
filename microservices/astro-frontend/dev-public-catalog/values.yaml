@@ -25,4 +25,4 @@ deployment:
   envFromSecrets:
     PUBLICMODEL_SQL_DB_USERNAME: "public-catalog-data-astro-frontend-user.username"
     PUBLICMODEL_SQL_DB_PASSWORD: "public-catalog-data-astro-frontend-user.password"
-    STRAPI_API_TOKEN: "" # Must be generated from the Strapi dashboard and copied into SM manually
+    STRAPI_API_TOKEN: "public-catalog-astro-frontend-strapi-api-token" # Must be generated from the Strapi dashboard and copied into SM manually
