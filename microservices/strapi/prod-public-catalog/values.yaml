@@ -10,6 +10,8 @@ service:
 
 configmap:
   AWS_BUCKET: "interop-public-catalog-cms-assets-prod-es1"
+  CDN_URL: "api.gov.it"
+  CDN_ROOT_PATH: "/cms-assets/"
   CDN_ID: "" #TBD
   CDN_INVALIDATION_PATH: "/news/*"
   GH_WORKFLOW_OWNER: "pagopa"
