@@ -14,9 +14,28 @@ service:
 configmap:
   STRAPI_API_ENDPOINT: "http://strapi.{{.Values.namespace}}:8080"
 
-deployment:
+deployment: 
+  flywayInitContainer:
+    create: true
+    version: "11.4.0"
+    downloadRedshiftDriver: false
+    migrationsConfigmap: "flyway-public-catalog"
+    env:
+      FLYWAY_CREATE_SCHEMAS: true
+      FLYWAY_PLACEHOLDER_REPLACEMENT: true
+      FLYWAY_PLACEHOLDERS_NAMESPACE: "dev"
+      FLYWAY_URL: jdbc:postgresql://$(DB_HOST):$(DB_PORT)/$(DB_NAME)
+      FLYWAY_SCHEMAS: "{{.Values.local.env}}_catalog" # Necessary to define the schema in which Flyway will create the flyway_schema_history table
+    envFromConfigmaps:
+      DB_HOST: "common-public-catalog-data.DB_HOST"
+      DB_PORT: "common-public-catalog-data.DB_PORT"
+      DB_NAME: "common-public-catalog-data.DB_NAME"
+    envFromSecrets:
+      FLYWAY_USER: "public-catalog-data-flyway-user.username"
+      FLYWAY_PASSWORD: "public-catalog-data-flyway-user.password"
+
   envFromConfigmaps:
-    PUBLICMODEL_SQL_DB_HOST: "common-public-catalog-data.DB_HOST_RO"
+    PUBLICMODEL_SQL_DB_HOST: "common-public-catalog-data.DB_HOST"
     PUBLICMODEL_SQL_DB_PORT: "common-public-catalog-data.DB_PORT"
     PUBLICMODEL_SQL_DB_NAME: "common-public-catalog-data.DB_NAME"
     PUBLICMODEL_SQL_DB_USE_SSL: "common-public-catalog-data.DB_USE_SSL"

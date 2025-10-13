@@ -18,3 +18,4 @@ cronjob:
 
 local:
   awsAccountId: "697818730278"
+  env: "prod"

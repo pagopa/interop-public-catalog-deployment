@@ -10,3 +10,6 @@ data:
   DB_USE_SSL: "true"
   DB_NAME_STRAPI: "strapi"
   DB_SCHEMA_STRAPI: "strapi"
+  DB_SCHEMA_CATALOG: "prod_catalog"
+  DB_SCHEMA_ATTRIBUTE: "prod_attribute"
+  DB_SCHEMA_TENANT: "prod_tenant"

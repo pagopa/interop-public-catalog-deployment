@@ -20,3 +20,4 @@ deployment:
 
 local:
   awsAccountId: "505630707203"
+  env: "dev"

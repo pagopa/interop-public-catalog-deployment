@@ -1,0 +1,107 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flyway-public-catalog
+  namespace: dev-public-catalog
+data:
+  V1__catalog_Schema.sql: |-
+    CREATE SCHEMA IF NOT EXISTS "${NAMESPACE}_catalog";
+
+    GRANT USAGE ON SCHEMA "${NAMESPACE}_catalog" TO 
+      ${NAMESPACE}_public_catalog_updater_user,
+      readonly_user;
+
+    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_catalog" TO "readonly_user"; -- This can probably be removed since we grant default privileges when creating readononly_user (ref: https://github.com/pagopa/interop-infra/blob/main/src/main/public-catalog/10-aurora-public-catalog-data-pgsql-users.tf#L58)
+
+    CREATE TABLE IF NOT EXISTS "${NAMESPACE}_catalog".eservice (
+      id UUID,
+      metadata_version INTEGER NOT NULL,
+      producer_id UUID NOT NULL,
+      name VARCHAR NOT NULL,
+      description VARCHAR NOT NULL,
+      technology VARCHAR NOT NULL,
+      created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+      mode VARCHAR NOT NULL,
+      is_signal_hub_enabled BOOLEAN,
+      is_consumer_delegable BOOLEAN,
+      is_client_access_delegable BOOLEAN,
+      template_id UUID,
+      PRIMARY KEY (id),
+      CONSTRAINT eservice_id_metadata_version_unique UNIQUE (id, metadata_version)
+    );
+
+    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_catalog".eservice TO "${NAMESPACE}_public_catalog_updater_user";
+
+    CREATE TABLE IF NOT EXISTS "${NAMESPACE}_catalog".eservice_descriptor (
+      id UUID,
+      eservice_id UUID NOT NULL REFERENCES "${NAMESPACE}_catalog".eservice (id) ON DELETE CASCADE,
+      metadata_version INTEGER NOT NULL,
+      version VARCHAR NOT NULL,
+      description VARCHAR,
+      state VARCHAR NOT NULL,
+      audience VARCHAR ARRAY NOT NULL,
+      voucher_lifespan INTEGER NOT NULL,
+      daily_calls_per_consumer INTEGER NOT NULL,
+      daily_calls_total INTEGER NOT NULL,
+      agreement_approval_policy VARCHAR,
+      created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+      published_at TIMESTAMP WITH TIME ZONE,
+      suspended_at TIMESTAMP WITH TIME ZONE,
+      deprecated_at TIMESTAMP WITH TIME ZONE,
+      archived_at TIMESTAMP WITH TIME ZONE,
+      PRIMARY KEY (id),
+      FOREIGN KEY (eservice_id, metadata_version) REFERENCES "${NAMESPACE}_catalog".eservice (id, metadata_version) DEFERRABLE INITIALLY DEFERRED
+    );
+
+    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_catalog".eservice_descriptor TO "${NAMESPACE}_public_catalog_updater_user";
+
+    CREATE TABLE IF NOT EXISTS "${NAMESPACE}_catalog".eservice_descriptor_template_version_ref (
+      eservice_template_version_id UUID NOT NULL,
+      eservice_id UUID NOT NULL REFERENCES "${NAMESPACE}_catalog".eservice (id) ON DELETE CASCADE,
+      metadata_version INTEGER NOT NULL,
+      descriptor_id UUID NOT NULL REFERENCES "${NAMESPACE}_catalog".eservice_descriptor (id) ON DELETE CASCADE,
+      PRIMARY KEY (eservice_template_version_id, descriptor_id),
+      FOREIGN KEY (eservice_id, metadata_version) REFERENCES "${NAMESPACE}_catalog".eservice (id, metadata_version) DEFERRABLE INITIALLY DEFERRED
+    );
+
+    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_template_version_ref TO "${NAMESPACE}_public_catalog_updater_user";
+
+    CREATE TABLE IF NOT EXISTS "${NAMESPACE}_catalog".eservice_descriptor_attribute (
+      attribute_id UUID NOT NULL,
+      eservice_id UUID NOT NULL REFERENCES "${NAMESPACE}_catalog".eservice (id) ON DELETE CASCADE,
+      metadata_version INTEGER NOT NULL,
+      descriptor_id UUID NOT NULL REFERENCES "${NAMESPACE}_catalog".eservice_descriptor (id) ON DELETE CASCADE,
+      explicit_attribute_verification BOOLEAN NOT NULL,
+      kind VARCHAR NOT NULL,
+      group_id INTEGER NOT NULL,
+      PRIMARY KEY (attribute_id, descriptor_id, group_id),
+      FOREIGN KEY (eservice_id, metadata_version) REFERENCES "${NAMESPACE}_catalog".eservice (id, metadata_version) DEFERRABLE INITIALLY DEFERRED
+    );
+
+    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_attribute TO "${NAMESPACE}_public_catalog_updater_user";
+
+  V1__tenant_Schema.sql: |-
+    CREATE SCHEMA IF NOT EXISTS "${NAMESPACE}_tenant";
+
+    GRANT USAGE ON SCHEMA "${NAMESPACE}_tenant" TO 
+      "${NAMESPACE}_public_catalog_updater_user",
+      "readonly_user";
+
+    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_tenant" TO "readonly_user"; -- This can probably be removed since we grant default privileges when creating readononly_user (ref: https://github.com/pagopa/interop-infra/blob/main/src/main/public-catalog/10-aurora-public-catalog-data-pgsql-users.tf#L58)
+
+    CREATE TABLE IF NOT EXISTS "${NAMESPACE}_tenant".tenant (
+      id UUID,
+      metadata_version INTEGER NOT NULL,
+      kind VARCHAR,
+      external_id_origin VARCHAR NOT NULL,
+      external_id_value VARCHAR NOT NULL,
+      created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+      updated_at TIMESTAMP WITH TIME ZONE,
+      name VARCHAR NOT NULL,
+      onboarded_at TIMESTAMP WITH TIME ZONE,
+      sub_unit_type VARCHAR,
+      PRIMARY KEY (id),
+      CONSTRAINT tenant_id_metadata_version_unique UNIQUE (id, metadata_version)
+    );
+
+    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_tenant".tenant TO "${NAMESPACE}_public_catalog_updater_user";
