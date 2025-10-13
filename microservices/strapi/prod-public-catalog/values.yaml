@@ -14,7 +14,7 @@ configmap:
   AWS_REGION: "eu-south-1"
   AWS_BUCKET: "interop-public-catalog-cms-assets-prod-es1"
   CDN_ID: "" #TBD
-  CDN_INVALIDATION_PATH: "/news/*"
+  CDN_INVALIDATION_PATH: "/cms-assets/news/*"
   GH_WORKFLOW_OWNER: "pagopa"
   GH_WORKFLOW_REPO: "interop-public-catalog-deployment"
   GH_WORKFLOW_ID: "invalidate-cache.yaml" 
