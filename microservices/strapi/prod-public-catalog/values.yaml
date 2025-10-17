@@ -1,0 +1,38 @@
+name: "interop-public-catalog-strapi"
+
+serviceAccount:
+  roleArn: "arn:aws:iam::{{.Values.local.awsAccountId}}:role/interop-public-catalog-strapi-prod"
+
+service:
+  create: true
+  portName: http
+  containerPort: 8080
+
+configmap:
+  CDN_URL: "api.gov.it"
+  CDN_ROOT_PATH: "/cms-assets/"
+  AWS_REGION: "eu-south-1"
+  AWS_BUCKET: "interop-public-catalog-cms-assets-prod-es1"
+  CDN_ID: "" #TBD
+  CDN_INVALIDATION_PATH: "/cms-assets/*"
+  GH_WORKFLOW_OWNER: "pagopa"
+  GH_WORKFLOW_REPO: "interop-public-catalog-deployment"
+  GH_WORKFLOW_ID: "invalidate-cache.yaml" 
+
+deployment:
+  envFromConfigmaps:
+    DATABASE_CLIENT: "postgres"
+    DATABASE_HOST: "common-public-catalog-data.DB_HOST_RO"
+    DATABASE_PORT: "common-public-catalog-data.DB_PORT"
+    DATABASE_NAME: "common-public-catalog-data.DB_NAME_STRAPI"
+    DATABASE_SSL: "common-public-catalog-data.DB_USE_SSL"
+    DATABASE_SCHEMA: "common-public-catalog-data.DB_SCHEMA_STRAPI"
+  envFromSecrets:
+    DATABASE_USERNAME: "public-catalog-data-strapi-user.username"
+    DATABASE_PASSWORD: "public-catalog-data-strapi-user.password"
+    APP_KEYS: "public-catalog-strapi-app-keys.value"
+    API_TOKEN_SALT: "public-catalog-strapi-api-token-salt.value"
+    ADMIN_JWT_SECRET: "public-catalog-strapi-admin-jwt-key.value"
+    JWT_SECRET: "public-catalog-strapi-standard-users-jwt-key.value"
+    ENCRYPTION_KEY: "public-catalog-strapi-encryption-key.value"
+    GH_WORKFLOW_TOKEN: "public-catalog-strapi-gh-workflow-token.value"
