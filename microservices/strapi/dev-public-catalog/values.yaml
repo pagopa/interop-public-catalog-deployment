@@ -9,6 +9,7 @@ service:
   containerPort: 8080
 
 configmap:
+  DATABASE_CLIENT: "postgres"
   CDN_URL: "api-gov.dev.interop.pagopa.it"
   CDN_ROOT_PATH: "/cms-assets/"
   AWS_REGION: "eu-south-1"
@@ -21,7 +22,6 @@ configmap:
 
 deployment:
   envFromConfigmaps:
-    DATABASE_CLIENT: "postgres"
     DATABASE_HOST: "common-public-catalog-data.DB_HOST_RO"
     DATABASE_PORT: "common-public-catalog-data.DB_PORT"
     DATABASE_NAME: "common-public-catalog-data.DB_NAME_STRAPI"
