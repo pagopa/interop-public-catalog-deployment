@@ -4,7 +4,7 @@ metadata:
   name: flyway-public-catalog
   namespace: dev-public-catalog
 data:
-  V1__catalog_Schema.sql: |-
+  V1.0__catalog_Schema.sql: |-
     CREATE SCHEMA IF NOT EXISTS "${NAMESPACE}_catalog";
 
     GRANT USAGE ON SCHEMA "${NAMESPACE}_catalog" TO 
@@ -80,7 +80,7 @@ data:
 
     GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_attribute TO "${NAMESPACE}_public_catalog_updater_user";
 
-  V1__tenant_Schema.sql: |-
+  V1.1__tenant_Schema.sql: |-
     CREATE SCHEMA IF NOT EXISTS "${NAMESPACE}_tenant";
 
     GRANT USAGE ON SCHEMA "${NAMESPACE}_tenant" TO 
@@ -106,7 +106,7 @@ data:
 
     GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_tenant".tenant TO "${NAMESPACE}_public_catalog_updater_user";
 
-  V1__search_fts_trgm.sql: |-
+  V1.2__search_fts_trgm.sql: |-
     CREATE EXTENSION IF NOT EXISTS unaccent;
     CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
