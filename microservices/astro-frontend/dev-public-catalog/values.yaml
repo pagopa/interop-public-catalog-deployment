@@ -35,7 +35,7 @@ deployment:
       FLYWAY_PASSWORD: "public-catalog-data-flyway-user.password"
 
   env:
-      PORT: "8080"
+    PORT: "8080"
   envFromConfigmaps:
     PUBLICMODEL_SQL_DB_HOST: "common-public-catalog-data.DB_HOST"
     PUBLICMODEL_SQL_DB_PORT: "common-public-catalog-data.DB_PORT"
