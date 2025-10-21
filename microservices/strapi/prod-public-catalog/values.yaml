@@ -7,6 +7,7 @@ service:
   create: true
   portName: http
   containerPort: 8080
+  targetPort: 1337
 
 configmap:
   DATABASE_CLIENT: "postgres"
@@ -21,6 +22,8 @@ configmap:
   GH_WORKFLOW_REPO: "interop-public-catalog-deployment"
   GH_WORKFLOW_ID: "invalidate-cache.yaml" 
 
+env:
+  PORT: "1337"
 deployment:
   envFromConfigmaps:
     DATABASE_HOST: "common-public-catalog-data.DB_HOST"
