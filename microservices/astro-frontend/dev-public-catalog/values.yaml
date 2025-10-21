@@ -50,6 +50,14 @@ deployment:
     PUBLICMODEL_SQL_DB_PASSWORD: "public-catalog-data-astro-frontend-user.password"
     STRAPI_API_TOKEN: "public-catalog-astro-frontend-strapi-api-token.value"
 
+  resources:
+    requests:
+      cpu: "2000m"
+      memory: "4Gi"
+    limits:
+      cpu: "2000m"
+      memory: "4Gi"
+
   livenessProbe:
     httpGet:
       path: /api/status
