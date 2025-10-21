@@ -1,4 +1,4 @@
-name: "public-catalog-astro-frontend"
+name: "interop-public-catalog-astro-frontend"
 
 serviceAccount:
   roleArn: "arn:aws:iam::{{.Values.local.awsAccountId}}:role/interop-public-catalog-astro-frontend-dev"

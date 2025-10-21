@@ -10,6 +10,7 @@ service:
 
 configmap:
   DATABASE_CLIENT: "postgres"
+  DATABASE_SSL_SELF: "true"
   CDN_URL: "api.gov.it"
   CDN_ROOT_PATH: "/cms-assets/"
   AWS_REGION: "eu-south-1"
