@@ -1,4 +1,4 @@
-name: "public-catalog-updater"
+name: "interop-public-catalog-updater"
 
 serviceAccount:
   roleArn: "arn:aws:iam::{{.Values.local.awsAccountId}}:role/interop-public-catalog-updater-dev"
