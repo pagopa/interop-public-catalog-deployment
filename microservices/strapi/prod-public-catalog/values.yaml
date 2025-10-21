@@ -22,9 +22,9 @@ configmap:
   GH_WORKFLOW_REPO: "interop-public-catalog-deployment"
   GH_WORKFLOW_ID: "invalidate-cache.yaml" 
 
-env:
-  PORT: "1337"
 deployment:
+  env:
+    PORT: "1337"
   envFromConfigmaps:
     DATABASE_HOST: "common-public-catalog-data.DB_HOST"
     DATABASE_PORT: "common-public-catalog-data.DB_PORT"
