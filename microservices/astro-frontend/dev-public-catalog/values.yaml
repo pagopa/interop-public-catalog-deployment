@@ -16,7 +16,7 @@ configmap:
 
 deployment: 
   flywayInitContainer:
-    create: true
+    create: false
     version: "11.4.0"
     downloadRedshiftDriver: false
     migrationsConfigmap: "flyway-public-catalog"
@@ -41,6 +41,7 @@ deployment:
     PUBLICMODEL_SQL_DB_USE_SSL: "common-public-catalog-data.DB_USE_SSL"
     PUBLICMODEL_SQL_DB_SCHEMA_TENANT: "common-public-catalog-data.DB_SCHEMA_TENANT"
     PUBLICMODEL_SQL_DB_SCHEMA_CATALOG: "common-public-catalog-data.DB_SCHEMA_CATALOG"
+    PUBLICMODEL_SQL_DB_SCHEMA_ATTRIBUTE: "common-public-catalog-data.DB_SCHEMA_ATTRIBUTE"
   envFromSecrets:
     PUBLICMODEL_SQL_DB_USERNAME: "public-catalog-data-astro-frontend-user.username"
     PUBLICMODEL_SQL_DB_PASSWORD: "public-catalog-data-astro-frontend-user.password"
