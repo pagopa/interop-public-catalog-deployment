@@ -10,7 +10,7 @@ service:
 
 configmap:
   DATABASE_CLIENT: "postgres"
-  DATABASE_SSL: "false"
+  DATABASE_SSL_SELF: "true"
   CDN_URL: "api.gov.it"
   CDN_ROOT_PATH: "/cms-assets/"
   AWS_REGION: "eu-south-1"
@@ -26,6 +26,7 @@ deployment:
     DATABASE_HOST: "common-public-catalog-data.DB_HOST_RO"
     DATABASE_PORT: "common-public-catalog-data.DB_PORT"
     DATABASE_NAME: "common-public-catalog-data.DB_NAME_STRAPI"
+    DATABASE_SSL: "common-public-catalog-data.DB_USE_SSL"
     DATABASE_SCHEMA: "common-public-catalog-data.DB_SCHEMA_STRAPI"
   envFromSecrets:
     DATABASE_USERNAME: "public-catalog-data-strapi-user.username"
