@@ -13,7 +13,6 @@ service:
 
 configmap:
   STRAPI_API_ENDPOINT: "http://strapi.{{.Values.namespace}}:8080"
-  PORT: "8080"
 
 deployment:
   flywayInitContainer:
@@ -34,7 +33,9 @@ deployment:
     envFromSecrets:
       FLYWAY_USER: "public-catalog-data-flyway-user.username"
       FLYWAY_PASSWORD: "public-catalog-data-flyway-user.password"
-  
+
+  env:
+      PORT: "8080"
   envFromConfigmaps:
     PUBLICMODEL_SQL_DB_HOST: "common-public-catalog-data.DB_HOST_RO"
     PUBLICMODEL_SQL_DB_PORT: "common-public-catalog-data.DB_PORT"
