@@ -7,7 +7,7 @@ service:
   create: true
   portName: http
   containerPort: 8080
-  targetGroupArn: "arn:aws:elasticloadbalancing:eu-south-1:{{.Values.local.awsAccountId}}:targetgroup/dev-public-catalog-astro/455b8fd22cedaf18"
+  targetGroupArn: "arn:aws:elasticloadbalancing:eu-south-1:505630707203:targetgroup/dev-public-catalog-astro/5ac3d2af028d1eee"
   targetType: "ip"
   ipAddressType: "ipv4"
 
