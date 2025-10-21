@@ -48,3 +48,16 @@ deployment:
     PUBLICMODEL_SQL_DB_USERNAME: "public-catalog-data-astro-frontend-user.username"
     PUBLICMODEL_SQL_DB_PASSWORD: "public-catalog-data-astro-frontend-user.password"
     STRAPI_API_TOKEN: "public-catalog-astro-frontend-strapi-api-token.value"
+
+  livenessProbe:
+    httpGet:
+      path: /api/status
+      port: http
+    initialDelaySeconds: 15
+    periodSeconds: 5
+  readinessProbe:
+    httpGet:
+      path: /api/status
+      port: http
+    initialDelaySeconds: 15
+    periodSeconds: 5
