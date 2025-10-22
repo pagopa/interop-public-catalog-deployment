@@ -32,7 +32,7 @@ deployment:
       FLYWAY_PLACEHOLDER_REPLACEMENT: true
       FLYWAY_PLACEHOLDERS_NAMESPACE: "dev"
       FLYWAY_URL: jdbc:postgresql://$(DB_HOST):$(DB_PORT)/$(DB_NAME_STRAPI)
-      FLYWAY_SCHEMAS: "strapi"
+      FLYWAY_SCHEMAS: "dev_strapi"
     envFromConfigmaps:
       DB_HOST: "common-public-catalog-data.DB_HOST"
       DB_PORT: "common-public-catalog-data.DB_PORT"
