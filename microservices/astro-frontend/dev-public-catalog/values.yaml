@@ -37,6 +37,8 @@ deployment:
   env:
     HOST: "0.0.0.0"
     PORT: "8080"
+    PUBLIC_ONETRUST_DOMAIN_SCRIPT_ID: "01995c12-d809-7763-b0b5-e7f94f61aeb1"
+    PUBLIC_MIXPANEL_PROJECT_ID: "fd338875c11dfe26a3219337a652ec5d"
   envFromConfigmaps:
     PUBLICMODEL_SQL_DB_HOST: "common-public-catalog-data.DB_HOST"
     PUBLICMODEL_SQL_DB_PORT: "common-public-catalog-data.DB_PORT"
