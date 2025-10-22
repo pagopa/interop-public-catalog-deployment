@@ -7,7 +7,7 @@ service:
   create: true
   portName: http
   containerPort: 8080
-  targetGroupArn: "arn:aws:elasticloadbalancing:eu-south-1:{{.Values.local.awsAccountId}}:targetgroup/dev-public-catalog-astro/455b8fd22cedaf18"
+  targetGroupArn: "arn:aws:elasticloadbalancing:eu-south-1:505630707203:targetgroup/dev-public-catalog-astro/5ac3d2af028d1eee"
   targetType: "ip"
   ipAddressType: "ipv4"
 
@@ -35,6 +35,7 @@ deployment:
       FLYWAY_PASSWORD: "public-catalog-data-flyway-user.password"
 
   env:
+    HOST: "0.0.0.0"
     PORT: "8080"
   envFromConfigmaps:
     PUBLICMODEL_SQL_DB_HOST: "common-public-catalog-data.DB_HOST"
@@ -48,6 +49,14 @@ deployment:
     PUBLICMODEL_SQL_DB_USERNAME: "public-catalog-data-astro-frontend-user.username"
     PUBLICMODEL_SQL_DB_PASSWORD: "public-catalog-data-astro-frontend-user.password"
     STRAPI_API_TOKEN: "public-catalog-astro-frontend-strapi-api-token.value"
+
+  resources:
+    requests:
+      cpu: "2000m"
+      memory: "4Gi"
+    limits:
+      cpu: "2000m"
+      memory: "4Gi"
 
   livenessProbe:
     httpGet:
