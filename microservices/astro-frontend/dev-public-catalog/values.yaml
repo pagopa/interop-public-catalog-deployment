@@ -12,7 +12,7 @@ service:
   ipAddressType: "ipv4"
 
 configmap:
-  STRAPI_API_ENDPOINT: "http://strapi.{{.Values.namespace}}:8080"
+  STRAPI_API_ENDPOINT: "http://strapi.{{.Values.namespace}}:1337"
 
 deployment:
   flywayInitContainer:

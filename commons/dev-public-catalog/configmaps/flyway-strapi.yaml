@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flyway-strapi
+  namespace: dev-public-catalog
+data:
+  V1.0__strapi_Schema.sql: |-
+    CREATE SCHEMA IF NOT EXISTS "{NAMESPACE}_strapi";
+
+    GRANT CREATE ON SCHEMA "strapi" TO "${NAMESPACE}_strapi_user";

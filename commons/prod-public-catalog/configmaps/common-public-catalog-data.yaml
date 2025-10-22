@@ -4,12 +4,13 @@ metadata:
   name: common-public-catalog-data
   namespace: prod-public-catalog
 data:
+  DB_HOST: "interop-public-catalog-data-prod..." #TBD
   DB_HOST_RO: "interop-public-catalog-data-prod..." #TBD
   DB_PORT: "5432"
-  DB_NAME: "interop_public_catalog_data_prod"
+  DB_NAME: "prod_public_catalog"
   DB_USE_SSL: "true"
-  DB_NAME_STRAPI: "strapi"
-  DB_SCHEMA_STRAPI: "strapi"
+  DB_NAME_STRAPI: "prod_strapi"
+  DB_SCHEMA_STRAPI: "prod_strapi"
   DB_SCHEMA_CATALOG: "prod_catalog"
   DB_SCHEMA_ATTRIBUTE: "prod_attribute"
   DB_SCHEMA_TENANT: "prod_tenant"
