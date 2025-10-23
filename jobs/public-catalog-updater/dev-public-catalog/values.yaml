@@ -33,21 +33,25 @@ cronjob:
       FLYWAY_USER: "public-catalog-data-flyway-user.username"
       FLYWAY_PASSWORD: "public-catalog-data-flyway-user.password"
 
+  env:
+    BATCH_SIZE: 500
   envFromConfigmaps:
     READMODEL_SQL_DB_HOST: "common-read-model.DB_HOST"
     READMODEL_SQL_DB_PORT: "common-read-model.DB_PORT"
     READMODEL_SQL_DB_NAME: "common-read-model.DB_NAME"
     READMODEL_SQL_DB_USE_SSL: "common-read-model.DB_USE_SSL"
-    PUBLIC_CATALOG_DATA_SQL_DB_HOST: "common-public-catalog-data.DB_HOST"
-    PUBLIC_CATALOG_DATA_SQL_DB_PORT: "common-public-catalog-data.DB_PORT"
-    PUBLIC_CATALOG_DATA_SQL_DB_NAME: "common-public-catalog-data.DB_NAME"
-    PUBLIC_CATALOG_DATA_SQL_DB_USE_SSL: "common-public-catalog-data.DB_USE_SSL"
-    PUBLIC_CATALOG_SCHEMA_CATALOG: "common-public-catalog-data.DB_SCHEMA_CATALOG"
-    PUBLIC_CATALOG_SCHEMA_ATTRIBUTE: "common-public-catalog-data.DB_SCHEMA_ATTRIBUTE"
-    PUBLIC_CATALOG_SCHEMA_TENANT: "common-public-catalog-data.DB_SCHEMA_TENANT"
-
+    READMODEL_SQL_DB_SCHEMA_CATALOG: "common-public-catalog-data.DB_SCHEMA_CATALOG"
+    READMODEL_SQL_DB_SCHEMA_ATTRIBUTE: "common-public-catalog-data.DB_SCHEMA_ATTRIBUTE"
+    READMODEL_SQL_DB_SCHEMA_TENANT: "common-public-catalog-data.DB_SCHEMA_TENANT"
+    PUBLICMODEL_SQL_DB_HOST: "common-public-catalog-data.DB_HOST"
+    PUBLICMODEL_SQL_DB_PORT: "common-public-catalog-data.DB_PORT"
+    PUBLICMODEL_SQL_DB_NAME: "common-public-catalog-data.DB_NAME"
+    PUBLICMODEL_SQL_DB_USE_SSL: "common-public-catalog-data.DB_USE_SSL"
+    PUBLICMODEL_SQL_DB_SCHEMA_CATALOG: "common-public-catalog-data.DB_SCHEMA_CATALOG"
+    PUBLICMODEL_SQL_DB_SCHEMA_ATTRIBUTE: "common-public-catalog-data.DB_SCHEMA_ATTRIBUTE"
+    PUBLICMODEL_SQL_DB_SCHEMA_TENANT: "common-public-catalog-data.DB_SCHEMA_TENANT"
   envFromSecrets:
     READMODEL_SQL_DB_USERNAME: "platform-data-public-catalog-updater-user.username"
     READMODEL_SQL_DB_PASSWORD: "platform-data-public-catalog-updater-user.password"
-    PUBLIC_CATALOG_DATA_SQL_DB_USERNAME: "public-catalog-data-public-catalog-updater-user.username"
-    PUBLIC_CATALOG_DATA_SQL_DB_PASSWORD: "public-catalog-data-public-catalog-updater-user.password"
+    PUBLICMODEL_SQL_DB_USERNAME: "public-catalog-data-public-catalog-updater-user.username"
+    PUBLICMODEL_SQL_DB_PASSWORD: "public-catalog-data-public-catalog-updater-user.password"
