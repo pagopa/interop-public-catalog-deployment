@@ -9,9 +9,10 @@ data:
 
     GRANT USAGE ON SCHEMA "${NAMESPACE}_catalog" TO 
       ${NAMESPACE}_public_catalog_updater_user,
+      ${NAMESPACE}_astro_frontend_user,
       readonly_user;
 
-    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_catalog" TO "readonly_user"; -- This can probably be removed since we grant default privileges when creating readononly_user (ref: https://github.com/pagopa/interop-infra/blob/main/src/main/public-catalog/10-aurora-public-catalog-data-pgsql-users.tf#L58)
+    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_catalog" TO "readonly_user";
 
     CREATE TABLE IF NOT EXISTS "${NAMESPACE}_catalog".eservice (
       id UUID,
@@ -31,6 +32,7 @@ data:
     );
 
     GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_catalog".eservice TO "${NAMESPACE}_public_catalog_updater_user";
+    GRANT SELECT ON TABLE "${NAMESPACE}_catalog".eservice TO "${NAMESPACE}_astro_frontend_user";
 
     CREATE TABLE IF NOT EXISTS "${NAMESPACE}_catalog".eservice_descriptor (
       id UUID,
@@ -54,6 +56,7 @@ data:
     );
 
     GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_catalog".eservice_descriptor TO "${NAMESPACE}_public_catalog_updater_user";
+    GRANT SELECT ON TABLE "${NAMESPACE}_catalog".eservice_descriptor TO "${NAMESPACE}_astro_frontend_user";
 
     CREATE TABLE IF NOT EXISTS "${NAMESPACE}_catalog".eservice_descriptor_template_version_ref (
       eservice_template_version_id UUID NOT NULL,
@@ -65,6 +68,7 @@ data:
     );
 
     GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_template_version_ref TO "${NAMESPACE}_public_catalog_updater_user";
+    GRANT SELECT ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_template_version_ref TO "${NAMESPACE}_astro_frontend_user";
 
     CREATE TABLE IF NOT EXISTS "${NAMESPACE}_catalog".eservice_descriptor_attribute (
       attribute_id UUID NOT NULL,
@@ -79,15 +83,17 @@ data:
     );
 
     GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_attribute TO "${NAMESPACE}_public_catalog_updater_user";
-    
+    GRANT SELECT ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_attribute TO "${NAMESPACE}_astro_frontend_user";
+
   V1.1__tenant_Schema.sql: |-
     CREATE SCHEMA IF NOT EXISTS "${NAMESPACE}_tenant";
 
     GRANT USAGE ON SCHEMA "${NAMESPACE}_tenant" TO 
       "${NAMESPACE}_public_catalog_updater_user",
+      "${NAMESPACE}_astro_frontend_user",
       "readonly_user";
 
-    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_tenant" TO "readonly_user"; -- This can probably be removed since we grant default privileges when creating readononly_user (ref: https://github.com/pagopa/interop-infra/blob/main/src/main/public-catalog/10-aurora-public-catalog-data-pgsql-users.tf#L58)
+    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_tenant" TO "readonly_user";
 
     CREATE TABLE IF NOT EXISTS "${NAMESPACE}_tenant".tenant (
       id UUID,
@@ -105,8 +111,34 @@ data:
     );
 
     GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_tenant".tenant TO "${NAMESPACE}_public_catalog_updater_user";
+    GRANT SELECT ON TABLE "${NAMESPACE}_tenant".tenant TO "${NAMESPACE}_astro_frontend_user";
 
-  V1.2__search_fts_trgm.sql: |-
+  V1.2__attribute_Schema.sql: |-
+    CREATE SCHEMA IF NOT EXISTS "${NAMESPACE}_attribute";
+
+    GRANT USAGE ON SCHEMA "${NAMESPACE}_attribute" TO 
+      "${NAMESPACE}_public_catalog_updater_user",
+      "${NAMESPACE}_astro_frontend_user",
+      "readonly_user";
+
+    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_attribute" TO "readonly_user";
+
+    CREATE TABLE IF NOT EXISTS "${NAMESPACE}_attribute".attribute (
+      id UUID,
+      metadata_version INTEGER NOT NULL,
+      code VARCHAR,
+      kind VARCHAR NOT NULL,
+      description VARCHAR NOT NULL,
+      origin VARCHAR,
+      name VARCHAR NOT NULL,
+      creation_time TIMESTAMP WITH TIME ZONE NOT NULL,
+      PRIMARY KEY (id)
+    );
+
+    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_attribute".attribute TO "${NAMESPACE}_public_catalog_updater_user";
+    GRANT SELECT ON TABLE "${NAMESPACE}_attribute".attribute TO "${NAMESPACE}_astro_frontend_user";
+
+  V1.3__search_fts_trgm.sql: |-
     CREATE EXTENSION IF NOT EXISTS unaccent;
     CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
