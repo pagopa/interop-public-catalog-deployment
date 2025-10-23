@@ -12,7 +12,7 @@ data:
       ${NAMESPACE}_astro_frontend_user,
       readonly_user;
 
-    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_catalog" TO "readonly_user"; -- This can probably be removed since we grant default privileges when creating readononly_user (ref: https://github.com/pagopa/interop-infra/blob/main/src/main/public-catalog/10-aurora-public-catalog-data-pgsql-users.tf#L58)
+    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_catalog" TO "readonly_user";
 
     CREATE TABLE IF NOT EXISTS "${NAMESPACE}_catalog".eservice (
       id UUID,
@@ -93,7 +93,7 @@ data:
       "${NAMESPACE}_astro_frontend_user",
       "readonly_user";
 
-    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_tenant" TO "readonly_user"; -- This can probably be removed since we grant default privileges when creating readononly_user (ref: https://github.com/pagopa/interop-infra/blob/main/src/main/public-catalog/10-aurora-public-catalog-data-pgsql-users.tf#L58)
+    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_tenant" TO "readonly_user";
 
     CREATE TABLE IF NOT EXISTS "${NAMESPACE}_tenant".tenant (
       id UUID,
@@ -121,7 +121,7 @@ data:
       "${NAMESPACE}_astro_frontend_user",
       "readonly_user";
 
-    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_attribute" TO "readonly_user"; -- This can probably be removed since we grant default privileges when creating readononly_user (ref: https://github.com/pagopa/interop-infra/blob/main/src/main/public-catalog/10-aurora-public-catalog-data-pgsql-users.tf#L58)
+    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_attribute" TO "readonly_user";
 
     CREATE TABLE IF NOT EXISTS "${NAMESPACE}_attribute".attribute (
       id UUID,
