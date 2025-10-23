@@ -5,6 +5,6 @@ metadata:
   namespace: prod-public-catalog
 data:
   V1.0__strapi_Schema.sql: |-
-    CREATE SCHEMA IF NOT EXISTS "{NAMESPACE}_strapi";
+    CREATE SCHEMA IF NOT EXISTS "${NAMESPACE}_strapi";
 
-    GRANT CREATE ON SCHEMA "{NAMESPACE}_strapi" TO "${NAMESPACE}_strapi_user";
+    GRANT CREATE ON SCHEMA "${NAMESPACE}_strapi" TO "${NAMESPACE}_strapi_user";
