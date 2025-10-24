@@ -1,8 +1,8 @@
 * @micdes-pagopa
 
-commons/dev/** @micheledellipaoli-pagopa @Carminepo2
-microservices/*/dev/* @micheledellipaoli-pagopa @Carminepo2
-jobs/*/dev/* @micheledellipaoli-pagopa @Carminepo2
+commons/dev-public-catalog/** @micheledellipaoli-pagopa @Carminepo2
+microservices/*/dev-public-catalog/* @micheledellipaoli-pagopa @Carminepo2
+jobs/*/dev-public-catalog/* @micheledellipaoli-pagopa @Carminepo2
 
 commons/** @micdes-pagopa @ruggerocastagnola
 microservices/** @micdes-pagopa @ruggerocastagnola
