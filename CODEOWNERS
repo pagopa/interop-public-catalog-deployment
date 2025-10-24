@@ -1,9 +1,5 @@
 * @micdes-pagopa
 
-commons/dev-public-catalog/** @micheledellipaoli-pagopa @Carminepo2
-microservices/*/dev-public-catalog/* @micheledellipaoli-pagopa @Carminepo2
-jobs/*/dev-public-catalog/* @micheledellipaoli-pagopa @Carminepo2
-
-commons/** @micdes-pagopa @ruggerocastagnola
-microservices/** @micdes-pagopa @ruggerocastagnola
-jobs/** @micdes-pagopa @ruggerocastagnola
+commons/dev-public-catalog/** @micdes-pagopa @ruggerocastagnola @micheledellipaoli-pagopa @Carminepo2
+microservices/*/dev-public-catalog/* @micdes-pagopa @ruggerocastagnola @micheledellipaoli-pagopa @Carminepo2
+jobs/*/dev-public-catalog/* @micdes-pagopa @ruggerocastagnola @micheledellipaoli-pagopa @Carminepo2
