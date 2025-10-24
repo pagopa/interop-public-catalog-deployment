@@ -139,8 +139,8 @@ data:
     GRANT SELECT ON TABLE "${NAMESPACE}_attribute".attribute TO "${NAMESPACE}_astro_frontend_user";
 
   V1.3__search_fts_trgm.sql: |-
-    CREATE EXTENSION IF NOT EXISTS unaccent;
-    CREATE EXTENSION IF NOT EXISTS pg_trgm;
+    CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
+    CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
 
     DO $$
     BEGIN
@@ -158,7 +158,7 @@ data:
       SELECT trim(
         regexp_replace(
           lower(
-            regexp_replace(unaccent(coalesce(t,'')), '\.', '', 'g')
+            regexp_replace(public.unaccent(coalesce(t,'')), '\.', '', 'g')
           ),
             '[^a-z0-9]+', ' ', 'g'
         )
