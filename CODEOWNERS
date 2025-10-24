@@ -1,1 +1,9 @@
 * @micdes-pagopa
+
+commons/dev/** @micheledellipaoli-pagopa @Carminepo2
+microservices/*/dev/* @micheledellipaoli-pagopa @Carminepo2
+jobs/*/dev/* @micheledellipaoli-pagopa @Carminepo2
+
+commons/** @micdes-pagopa @ruggerocastagnola
+microservices/** @micdes-pagopa @ruggerocastagnola
+jobs/** @micdes-pagopa @ruggerocastagnola
