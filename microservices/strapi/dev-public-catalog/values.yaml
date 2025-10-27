@@ -59,3 +59,38 @@ deployment:
     JWT_SECRET: "public-catalog-strapi-standard-users-jwt-key.value"
     ENCRYPTION_KEY: "public-catalog-strapi-encryption-key.value"
     GH_WORKFLOW_TOKEN: "public-catalog-strapi-gh-workflow-token.value"
+    STRAPI_ADMIN_EMAIL: "public-catalog-strapi-app-admin-user.email"
+    STRAPI_ADMIN_PASSWORD: "public-catalog-strapi-app-admin-user.password"
+    STRAPI_ADMIN_FIRSTNAME: "public-catalog-strapi-app-admin-user.firstname"
+    STRAPI_ADMIN_LASTNAME: "public-catalog-strapi-app-admin-user.lastname"
+
+  postStartHook:
+    create: true
+    command:
+      - /bin/sh
+      - -c
+      - |
+        echo "Waiting for Strapi to be ready..."
+        timeout 300 sh -c '
+          until wget -q --spider http://127.0.0.1:1337/admin/register-admin; do
+            sleep 2
+          done
+        '
+        echo "Strapi is ready!"
+        echo "Registering admin if not exists..."
+
+        HTTP_CODE=$(wget --server-response --header="Content-Type: application/json" --post-data="{
+          \"email\":\"${STRAPI_ADMIN_EMAIL}\",
+          \"password\":\"${STRAPI_ADMIN_PASSWORD}\",
+          \"firstname\":\"${STRAPI_ADMIN_FIRSTNAME}\",
+          \"lastname\":\"${STRAPI_ADMIN_LASTNAME}\"
+        }" http://127.0.0.1:1337/admin/register-admin -O - 2>&1 | grep "HTTP/" | tail -1 | sed -E 's/.*HTTP\/[0-9.]+ ([0-9]+).*/\1/'
+
+        if [ "$HTTP_CODE" = "200" ]; then
+          echo "Admin registered successfully. HTTP code: $HTTP_CODE."
+        elif [ "$HTTP_CODE" = "400" ]; then
+          echo "Admin already exists. No action needed. HTTP code: $HTTP_CODE."
+        else
+          echo "An error occurred during admin registration. HTTP code: $HTTP_CODE."
+          exit 1
+        fi
