@@ -36,7 +36,7 @@ cronjob:
   env:
     BATCH_SIZE: 500
   envFromConfigmaps:
-    READMODEL_SQL_DB_HOST: "common-read-model.DB_HOST"
+    READMODEL_SQL_DB_HOST: "common-read-model.DB_HOST_RO"
     READMODEL_SQL_DB_PORT: "common-read-model.DB_PORT"
     READMODEL_SQL_DB_NAME: "common-read-model.DB_NAME"
     READMODEL_SQL_DB_USE_SSL: "common-read-model.DB_USE_SSL"

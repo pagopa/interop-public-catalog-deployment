@@ -79,12 +79,14 @@ deployment:
         echo "Strapi is ready!"
         echo "Registering admin if not exists..."
 
-        HTTP_CODE=$(wget --server-response --header="Content-Type: application/json" --post-data="{
-          \"email\":\"${STRAPI_ADMIN_EMAIL}\",
-          \"password\":\"${STRAPI_ADMIN_PASSWORD}\",
-          \"firstname\":\"${STRAPI_ADMIN_FIRSTNAME}\",
-          \"lastname\":\"${STRAPI_ADMIN_LASTNAME}\"
-        }" http://127.0.0.1:1337/admin/register-admin -O - 2>&1 | grep "HTTP/" | tail -1 | sed -E 's/.*HTTP\/[0-9.]+ ([0-9]+).*/\1/'
+        HTTP_CODE=$(
+          wget --server-response --header="Content-Type: application/json" --post-data="{
+            \"email\":\"${STRAPI_ADMIN_EMAIL}\",
+            \"password\":\"${STRAPI_ADMIN_PASSWORD}\",
+            \"firstname\":\"${STRAPI_ADMIN_FIRSTNAME}\",
+            \"lastname\":\"${STRAPI_ADMIN_LASTNAME}\"
+          }" http://127.0.0.1:1337/admin/register-admin -O - 2>&1 | grep "HTTP/" | tail -1 | sed -E 's/.*HTTP\/[0-9.]+ ([0-9]+).*/\1/'
+        )
 
         if [ "$HTTP_CODE" = "200" ]; then
           echo "Admin registered successfully. HTTP code: $HTTP_CODE."
