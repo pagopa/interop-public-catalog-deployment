@@ -7,12 +7,10 @@ data:
   V1.0__catalog_Schema.sql: |-
     CREATE SCHEMA IF NOT EXISTS "${NAMESPACE}_catalog";
 
-    GRANT USAGE ON SCHEMA "${NAMESPACE}_catalog" TO 
+    GRANT USAGE ON SCHEMA "${NAMESPACE}_catalog" TO
       ${NAMESPACE}_public_catalog_updater_user,
       ${NAMESPACE}_astro_frontend_user,
       readonly_user;
-
-    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_catalog" TO "readonly_user";
 
     CREATE TABLE IF NOT EXISTS "${NAMESPACE}_catalog".eservice (
       id UUID,
@@ -85,15 +83,15 @@ data:
     GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_attribute TO "${NAMESPACE}_public_catalog_updater_user";
     GRANT SELECT ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_attribute TO "${NAMESPACE}_astro_frontend_user";
 
+    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_catalog" TO "readonly_user";
+
   V1.1__tenant_Schema.sql: |-
     CREATE SCHEMA IF NOT EXISTS "${NAMESPACE}_tenant";
 
-    GRANT USAGE ON SCHEMA "${NAMESPACE}_tenant" TO 
+    GRANT USAGE ON SCHEMA "${NAMESPACE}_tenant" TO
       "${NAMESPACE}_public_catalog_updater_user",
       "${NAMESPACE}_astro_frontend_user",
       "readonly_user";
-
-    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_tenant" TO "readonly_user";
 
     CREATE TABLE IF NOT EXISTS "${NAMESPACE}_tenant".tenant (
       id UUID,
@@ -113,15 +111,15 @@ data:
     GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON TABLE "${NAMESPACE}_tenant".tenant TO "${NAMESPACE}_public_catalog_updater_user";
     GRANT SELECT ON TABLE "${NAMESPACE}_tenant".tenant TO "${NAMESPACE}_astro_frontend_user";
 
+    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_tenant" TO "readonly_user";
+
   V1.2__attribute_Schema.sql: |-
     CREATE SCHEMA IF NOT EXISTS "${NAMESPACE}_attribute";
 
-    GRANT USAGE ON SCHEMA "${NAMESPACE}_attribute" TO 
+    GRANT USAGE ON SCHEMA "${NAMESPACE}_attribute" TO
       "${NAMESPACE}_public_catalog_updater_user",
       "${NAMESPACE}_astro_frontend_user",
       "readonly_user";
-
-    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_attribute" TO "readonly_user";
 
     CREATE TABLE IF NOT EXISTS "${NAMESPACE}_attribute".attribute (
       id UUID,
@@ -137,6 +135,8 @@ data:
 
     GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON TABLE "${NAMESPACE}_attribute".attribute TO "${NAMESPACE}_public_catalog_updater_user";
     GRANT SELECT ON TABLE "${NAMESPACE}_attribute".attribute TO "${NAMESPACE}_astro_frontend_user";
+
+    GRANT SELECT ON ALL TABLES IN SCHEMA "${NAMESPACE}_attribute" TO "readonly_user";
 
   V1.3__search_fts_trgm.sql: |-
     CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
