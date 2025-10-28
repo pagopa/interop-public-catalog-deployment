@@ -31,7 +31,7 @@ data:
       CONSTRAINT eservice_id_metadata_version_unique UNIQUE (id, metadata_version)
     );
 
-    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_catalog".eservice TO "${NAMESPACE}_public_catalog_updater_user";
+    GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON TABLE "${NAMESPACE}_catalog".eservice TO "${NAMESPACE}_public_catalog_updater_user";
     GRANT SELECT ON TABLE "${NAMESPACE}_catalog".eservice TO "${NAMESPACE}_astro_frontend_user";
 
     CREATE TABLE IF NOT EXISTS "${NAMESPACE}_catalog".eservice_descriptor (
@@ -55,7 +55,7 @@ data:
       FOREIGN KEY (eservice_id, metadata_version) REFERENCES "${NAMESPACE}_catalog".eservice (id, metadata_version) DEFERRABLE INITIALLY DEFERRED
     );
 
-    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_catalog".eservice_descriptor TO "${NAMESPACE}_public_catalog_updater_user";
+    GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON TABLE "${NAMESPACE}_catalog".eservice_descriptor TO "${NAMESPACE}_public_catalog_updater_user";
     GRANT SELECT ON TABLE "${NAMESPACE}_catalog".eservice_descriptor TO "${NAMESPACE}_astro_frontend_user";
 
     CREATE TABLE IF NOT EXISTS "${NAMESPACE}_catalog".eservice_descriptor_template_version_ref (
@@ -67,7 +67,7 @@ data:
       FOREIGN KEY (eservice_id, metadata_version) REFERENCES "${NAMESPACE}_catalog".eservice (id, metadata_version) DEFERRABLE INITIALLY DEFERRED
     );
 
-    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_template_version_ref TO "${NAMESPACE}_public_catalog_updater_user";
+    GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_template_version_ref TO "${NAMESPACE}_public_catalog_updater_user";
     GRANT SELECT ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_template_version_ref TO "${NAMESPACE}_astro_frontend_user";
 
     CREATE TABLE IF NOT EXISTS "${NAMESPACE}_catalog".eservice_descriptor_attribute (
@@ -82,7 +82,7 @@ data:
       FOREIGN KEY (eservice_id, metadata_version) REFERENCES "${NAMESPACE}_catalog".eservice (id, metadata_version) DEFERRABLE INITIALLY DEFERRED
     );
 
-    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_attribute TO "${NAMESPACE}_public_catalog_updater_user";
+    GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_attribute TO "${NAMESPACE}_public_catalog_updater_user";
     GRANT SELECT ON TABLE "${NAMESPACE}_catalog".eservice_descriptor_attribute TO "${NAMESPACE}_astro_frontend_user";
 
   V1.1__tenant_Schema.sql: |-
@@ -110,7 +110,7 @@ data:
       CONSTRAINT tenant_id_metadata_version_unique UNIQUE (id, metadata_version)
     );
 
-    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_tenant".tenant TO "${NAMESPACE}_public_catalog_updater_user";
+    GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON TABLE "${NAMESPACE}_tenant".tenant TO "${NAMESPACE}_public_catalog_updater_user";
     GRANT SELECT ON TABLE "${NAMESPACE}_tenant".tenant TO "${NAMESPACE}_astro_frontend_user";
 
   V1.2__attribute_Schema.sql: |-
@@ -135,7 +135,7 @@ data:
       PRIMARY KEY (id)
     );
 
-    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE "${NAMESPACE}_attribute".attribute TO "${NAMESPACE}_public_catalog_updater_user";
+    GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON TABLE "${NAMESPACE}_attribute".attribute TO "${NAMESPACE}_public_catalog_updater_user";
     GRANT SELECT ON TABLE "${NAMESPACE}_attribute".attribute TO "${NAMESPACE}_astro_frontend_user";
 
   V1.3__search_fts_trgm.sql: |-
