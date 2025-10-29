@@ -22,3 +22,16 @@ deployment:
 local:
   awsAccountId: "505630707203"
   env: "dev"
+
+autoscaling:
+  keda:
+    create: true
+    minReplicaCount: 0 # this must be 0 when using 'cron' trigger for uptime cost optimization
+    maxReplicaCount: "{{.Values.deployment.replicas}}" # must be a string
+    triggers:
+    - type: cron
+      metadata:
+        timezone: Europe/Rome
+        start: 0 8 * * 1-5
+        end: 0 20 * * 1-5
+        desiredReplicas: "{{.Values.deployment.replicas}}" # must be a string
