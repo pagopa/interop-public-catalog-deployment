@@ -8,7 +8,7 @@ configmap:
   CDN_INVALIDATION_PATH: "/catalogo/*" #TBD
 
 cronjob:
-  schedule: "0 20 * * *"
+  schedule: "0 * * * *"
   timeZone: "Europe/Rome"
   failedJobsHistoryLimit: 2
   successfulJobsHistoryLimit: 1
