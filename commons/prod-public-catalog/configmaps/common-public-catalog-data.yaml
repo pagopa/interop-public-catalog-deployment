@@ -4,8 +4,8 @@ metadata:
   name: common-public-catalog-data
   namespace: prod-public-catalog
 data:
-  DB_HOST: "interop-public-catalog-data-prod..." #TBD
-  DB_HOST_RO: "interop-public-catalog-data-prod..." #TBD
+  DB_HOST: "interop-public-catalog-data-prod.cluster-cgo3fcsduspu.eu-south-1.rds.amazonaws.com"
+  DB_HOST_RO: "interop-public-catalog-data-prod.cluster-ro-cgo3fcsduspu.eu-south-1.rds.amazonaws.com"
   DB_PORT: "5432"
   DB_NAME: "prod_public_catalog"
   DB_USE_SSL: "true"
