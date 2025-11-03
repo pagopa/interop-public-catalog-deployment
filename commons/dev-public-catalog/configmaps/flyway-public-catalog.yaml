@@ -190,3 +190,7 @@ data:
 
     CREATE INDEX IF NOT EXISTS tenant_name_trgm
       ON "${NAMESPACE}_tenant".tenant USING GIN (public.normalize_text(name) gin_trgm_ops);
+
+  V1.4__create_index_on_Attribute_table.sql: |-
+    CREATE INDEX IF NOT EXISTS attribute_code_idx 
+      ON "${NAMESPACE}_attribute".attribute (code);
