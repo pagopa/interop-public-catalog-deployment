@@ -4,7 +4,7 @@ serviceAccount:
   roleArn: "arn:aws:iam::{{.Values.local.awsAccountId}}:role/interop-public-catalog-updater-prod"
 
 configmap:
-  CDN_ID: "" #TBD
+  CDN_ID: "E2C5WWB544IDBF"
   CDN_INVALIDATION_PATH: "/catalogo/*" #TBD
 
 cronjob:
