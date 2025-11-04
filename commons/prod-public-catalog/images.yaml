@@ -1,9 +1,9 @@
 images:
   microservices:
     astro-frontend:
-      tag: "1.0.0-RC1"
+      tag: "1.0.0-RC2"
     strapi:
-      tag: "1.0.0-RC1"
+      tag: "1.0.0-RC2"
   jobs:
     public-catalog-updater:
-      tag: "1.0.0-RC1"
+      tag: "1.0.0-RC2"
