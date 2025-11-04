@@ -5,7 +5,7 @@ serviceAccount:
 
 configmap:
   CDN_ID: "E2V4OXZKWZ5U4B"
-  CDN_INVALIDATION_PATH: "/catalogo/*" #TBD
+  CDN_INVALIDATION_PATH: "/it/catalogo/*, /en/catalog/*"
 
 cronjob:
   schedule: "0 8-20 * * 1-5"
