@@ -23,6 +23,11 @@ on:
         required: true
         default: true
         type: boolean
+      run_invalidate_cache:
+         description: 'Run job to invalidate CloudFront distribution cache after deployment'
+         required: true
+         default: true
+         type: boolean
 
 permissions:
   id-token: write
@@ -42,6 +47,7 @@ jobs:
           echo "- run_k8s_workflow: \`${{ inputs.run_k8s_workflow }}\`" >> $GITHUB_STEP_SUMMARY
           echo "- run_tf_apply_monitoring_workflow: \`${{ inputs.run_tf_apply_monitoring_workflow }}\`" >> $GITHUB_STEP_SUMMARY
           echo "- run_tf_apply_secrets_workflow: \`${{ inputs.run_tf_apply_secrets_workflow }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- run_invalidate_cache: \`${{ inputs.run_invalidate_cache }}\`" >> $GITHUB_STEP_SUMMARY
           echo "- HELM_FORCE_UPGRADE_MICROSERVICES_CSV: \`${{ vars.HELM_FORCE_UPGRADE_MICROSERVICES_CSV }}\`" >> $GITHUB_STEP_SUMMARY
           echo "- HELM_FORCE_UPGRADE_CRONJOBS_CSV: \`${{ vars.HELM_FORCE_UPGRADE_CRONJOBS_CSV }}\`" >> $GITHUB_STEP_SUMMARY
 
@@ -188,6 +194,31 @@ jobs:
     with:
       environment: ${{ inputs.environment }}
       infra_commons_tag: ${{ needs.initChecks.outputs.infra_commons_tag_computed }}
+
+  invalidate_cache:
+      needs: [ deploy ]
+      if: ${{ inputs.run_invalidate_cache }}
+      runs-on: ubuntu-latest
+      environment: ${{ inputs.environment }}
+      steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4
+        with:
+          aws-region: ${{ vars.AWS_REGION }}
+          role-to-assume: ${{ secrets.IAM_ROLE_ARN }}
+          role-session-name: interop-public-catalog-deployment-invalidate-cloudfront-distribution-cache-${{ github.run_number }}
+
+      - name: Invalidate CloudFront Cache
+        run: |
+          set -euo pipefail
+
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths ${{ vars.CLOUDFRONT_INVALIDATION_PATHS }}
 
   delete_runner:
     name: Delete Self-Hosted Runner
