@@ -215,7 +215,7 @@ jobs:
 
           aws cloudfront create-invalidation \
             --distribution-id ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths ${{ vars.CLOUDFRONT_INVALIDATION_PATHS }}
+            --paths "${{ vars.CLOUDFRONT_INVALIDATION_PATHS }}"  #space separated
 
   delete_runner:
     name: Delete Self-Hosted Runner
