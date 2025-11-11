@@ -12,10 +12,10 @@ configmap:
   DATABASE_CLIENT: "postgres"
   DATABASE_SSL_REJECT_UNAUTHORIZED: "false"
   CDN_URL: "api.gov.it"
-  CDN_ROOT_PATH: "/cms-assets/"
+  CDN_ROOT_PATH: "cms-assets/"
   AWS_REGION: "eu-south-1"
   AWS_BUCKET: "interop-public-catalog-cms-assets-prod-es1"
-  CDN_ID: "" #TBD
+  CDN_ID: "E2C5WWB544IDBF"
   CDN_INVALIDATION_PATH: "/cms-assets/*"
   GH_WORKFLOW_OWNER: "pagopa"
   GH_WORKFLOW_REPO: "interop-public-catalog-deployment"
