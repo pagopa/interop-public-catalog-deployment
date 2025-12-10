@@ -44,6 +44,7 @@ deployment:
   env:
     HOST: "0.0.0.0"
     PORT: "1337"
+    NODE_ENV: "development"
   envFromConfigmaps:
     DATABASE_HOST: "common-public-catalog-data.DB_HOST"
     DATABASE_PORT: "common-public-catalog-data.DB_PORT"
