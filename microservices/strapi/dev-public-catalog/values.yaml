@@ -95,3 +95,16 @@ deployment:
           echo "An error occurred during admin registration. HTTP code: $HTTP_CODE."
           exit 1
         fi
+
+  livenessProbe:
+    httpGet:
+      path: /_health
+      port: http
+    initialDelaySeconds: 15
+    periodSeconds: 5
+  readinessProbe:
+    httpGet:
+      path: /_health
+      port: http
+    initialDelaySeconds: 15
+    periodSeconds: 5
