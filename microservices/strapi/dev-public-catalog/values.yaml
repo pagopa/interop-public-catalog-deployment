@@ -7,7 +7,7 @@ service:
   create: true
   portName: http
   containerPort: 1337
-  targetGroupArn: "arn:aws:elasticloadbalancing:eu-south-1:505630707203:targetgroup/dev-public-catalog-strapi/fa7cc3dfc567e27b"
+  targetGroupArn: "arn:aws:elasticloadbalancing:eu-south-1:505630707203:targetgroup/dev-public-catalog-strapi/25ea361fd571e169"
   targetType: "ip"
   ipAddressType: "ipv4"
 
