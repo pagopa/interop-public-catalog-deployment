@@ -98,13 +98,13 @@ deployment:
 
   livenessProbe:
     httpGet:
-      path: /admin
+      path: /_health
       port: http
     initialDelaySeconds: 15
     periodSeconds: 5
   readinessProbe:
     httpGet:
-      path: /admin
+      path: /_health
       port: http
     initialDelaySeconds: 15
     periodSeconds: 5
