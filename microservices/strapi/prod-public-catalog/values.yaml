@@ -14,7 +14,7 @@ service:
 configmap:
   DATABASE_CLIENT: "postgres"
   DATABASE_SSL_REJECT_UNAUTHORIZED: "false"
-  CDN_URL: "api.gov.it"
+  CDN_URL: "https://api.gov.it"
   CDN_ROOT_PATH: "cms-assets/"
   AWS_REGION: "eu-south-1"
   AWS_BUCKET: "interop-public-catalog-cms-assets-prod-es1"
@@ -47,6 +47,7 @@ deployment:
   env:
     HOST: "0.0.0.0"
     PORT: "1337"
+    NODE_ENV: "production"
   envFromConfigmaps:
     DATABASE_HOST: "common-public-catalog-data.DB_HOST"
     DATABASE_PORT: "common-public-catalog-data.DB_PORT"
@@ -94,3 +95,16 @@ deployment:
           echo "An error occurred during admin registration. HTTP code: $HTTP_CODE."
           exit 1
         fi
+
+  livenessProbe:
+    httpGet:
+      path: /_health
+      port: http
+    initialDelaySeconds: 15
+    periodSeconds: 5
+  readinessProbe:
+    httpGet:
+      path: /_health
+      port: http
+    initialDelaySeconds: 15
+    periodSeconds: 5
