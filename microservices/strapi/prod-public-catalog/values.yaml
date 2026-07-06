@@ -7,6 +7,9 @@ service:
   create: true
   portName: http
   containerPort: 1337
+  targetGroupArn: "arn:aws:elasticloadbalancing:eu-south-1:697818730278:targetgroup/prod-public-catalog-strapi/1d611a1dd77e208c"
+  targetType: "ip"
+  ipAddressType: "ipv4"
 
 configmap:
   DATABASE_CLIENT: "postgres"
